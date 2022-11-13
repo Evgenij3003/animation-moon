@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Anime</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/null.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+
+
+    <div class="wrapper">
+
+
+        <!-- Animation -->
+        <div class="animation">
+            <h2 class="animation__text _text-animate">
+                <span>Moon </span>Light
+            </h2>
+            <img src="img/anime/stars.png" class="animation__image _stars" alt="stars">
+            <img src="img/anime/moon.png" class="animation__image _moon" alt="moon">
+            <img src="img/anime/mountains_behind.png" class="animation__image _mountains-behind" alt="mountainsBehind">
+            <img src="img/anime/mountains_front.png" class="animation__image _mountains-front" alt="mountainsFront">
+            <button class="animation__button _button-animate">Play</button>
+        </div>
+
+    </div>
+
+
+
+    <style>
+        /*==================================================================================================================================================================*/
+        /* Общие Стили */
+        html, 
+        body {
+            background: linear-gradient(#2b1055, #7597de);
+        }
+
+
+
+        /*==================================================================================================================================================================*/
+        /* Animation */
+        .animation {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            padding: 100px;
+            overflow: hidden;
+        }
+
+        .animation__image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        ._stars {
+            top: -100%;
+            height: 100%;
+        }
+
+        ._moon {
+            top: -100%;
+            mix-blend-mode: screen;
+        }
+
+        ._mountains-behind {
+            top: initial;
+            bottom: -100%;
+            z-index: 10;
+        }
+
+        ._mountains-front {
+            top: initial;
+            bottom: -150%;
+            z-index: 100;
+        }
+
+        .animation__text {
+            position: absolute;
+            top: 45%;
+            left: 150%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            font-size: 100px;
+            font-weight: 200;
+            color: #fff;
+            z-index: 11;
+        }
+
+        .animation__text span {
+            font-weight: 900;
+        }
+
+        .animation__button {
+            position: absolute;
+            display: block;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 8px 30px;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #2b1055;
+            background: #fff;
+            border-radius: 40px;
+            cursor: pointer;
+            opacity: 1;
+            transition: color 0.3s, background-color 0.3s;
+            z-index: 100;
+        }
+
+        .animation__button:hover {
+            color: #fff;
+            background-color: #2b1055;
+        }
+    </style>
+
+
+
+    <script src="js/anime.min.js"></script>
+
+
+
+    <script>
+        /*==================================================================================================================================================================*/
+        /* Animation */
+        let animation = anime.timeline({
+            autoplay: false,
+        });
+
+
+        let buttonAnimation = document.querySelector("._button-animate").onclick = animation.play;
+        animation
+            .add({
+                targets: "._button-animate",
+                opacity: "0",
+                duration: 300,
+                easing: "easeInOutSine",
+            })
+            .add({
+                targets: "._stars",
+                top: "0px",
+                duration: 600,
+                easing: "easeInOutSine",
+            })
+            .add({
+                targets: "._moon",
+                top: "0px",
+                duration: 800,
+                easing: "easeInOutBack",
+            }, "-=300")
+            .add({
+                targets: "._mountains-behind",
+                bottom: "0px",
+                duration: 800,
+                easing: "easeInOutSine",
+            })
+            .add({
+                targets: "._mountains-front",
+                bottom: "0px",
+                duration: 800,
+                easing: "easeInOutSine",
+            }, "-=200")
+            .add({
+                targets: "._text-animate",
+                left: "50%",
+                duration: 700,
+                easing: "easeInOutBack",
+            })
+            .add({
+                targets: "._button-animate",
+                opacity: "1",
+                duration: 1000,
+                easing: "easeInOutBack",
+            });
+    </script>
+
+
+
+</body>
+</html>
